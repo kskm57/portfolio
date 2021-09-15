@@ -1,3 +1,60 @@
+・記事article
+
+Model　作成中
+
+View　作成中(admin)  作成中(閲覧者・非ログインユーザー) 
+
+Controller　作成中(admin)  作成中(閲覧者・非ログインユーザー) 
+
+
+・掲示板 post
+
+Model
+
+View
+
+Controller
+
+
+・記事コメント article comment
+
+Model
+
+View
+
+Controller
+
+
+・掲示板コメント post comment
+
+Model
+
+View
+
+Controller
+
+
+・いいね like
+
+Model
+
+View
+
+Controller
+
+
+・フォロー follow
+
+Model
+
+View
+
+Controller
+
+
+
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
