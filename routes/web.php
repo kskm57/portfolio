@@ -20,20 +20,23 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     
     
     //マイページ
-    Route::get('mypage', 'Admin\XXXController@add');    
+    Route::get('user', 'Admin\UserController@add');    
     
     //記事
-    Route::get('article/home', 'Admin\ArticleController@home');    
+    Route::get('article/home', 'Admin\ArticleController@home');    //検索条件入力画面
     Route::get('article/create', 'Admin\ArticleController@add');
     Route::post('article/create', 'Admin\ArticleController@create');
-    Route::get('article', 'Admin\ArticleController@index');    
+    Route::get('article', 'Admin\ArticleController@index');
+    Route::get('article/detail', 'Admin\ArticleController@detail');    
     Route::get('article/edit', 'Admin\ArticleController@edit');
     Route::post('article/edit', 'Admin\ArticleController@update');
-
+    Route::get('article/delete', 'Admin\ArticleController@delete');
+    
     //掲示板
     Route::get('board/create', 'Admin\BoardController@add');
     Route::post('board/create', 'Admin\BoardController@create');
-    Route::get('board', 'Admin\BoardController@index');    
+    Route::get('board', 'Admin\BoardController@index');
+    Route::get('board/detail', 'Admin\BoardController@detail');
     Route::get('board/edit', 'Admin\BoardController@edit');
     Route::post('board/edit', 'Admin\BoardController@update');
 
@@ -51,7 +54,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
 Auth::routes();
 
-//未設定　貼っただけ 後で編集する
+
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'NewsController@search');
-Route::get('/profile', 'ProfileController@index');
+Route::get('/', 'ArticleController@home');
+//Route::get('/', 'BoardController@index');
+

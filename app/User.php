@@ -36,4 +36,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    
+    
+    protected $guarded = array('id');
+    
+    
+        public function article()
+    {
+        return $this->hasMany('App\Article');
+
+    }
 }
