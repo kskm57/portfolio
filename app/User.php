@@ -42,9 +42,17 @@ class User extends Authenticatable
     protected $guarded = array('id');
     
     
-        public function article()
+    public function articles()
     {
         return $this->hasMany('App\Article');
 
     }
+    
+    
+        public function comments()
+    {
+        return $this->hasMany('App\Comment');
+
+    }
+
 }

@@ -32,6 +32,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     Route::post('article/edit', 'Admin\ArticleController@update');
     Route::get('article/delete', 'Admin\ArticleController@delete');
     
+    //コメント
+    Route::post('article/detail', 'Admin\CommentController@create');
+    Route::get('article/comment/delete', 'Admin\CommentController@delete');
+    
     //掲示板
     Route::get('board/create', 'Admin\BoardController@add');
     Route::post('board/create', 'Admin\BoardController@create');

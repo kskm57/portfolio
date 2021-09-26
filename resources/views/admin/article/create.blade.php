@@ -70,9 +70,7 @@ old('place') }}">
                         </div>
                 </div>
                 
-                
-                <input type="hidden" name="user_id" value="{{ $user->id }}"> 
-                
+        
                 
                  {{ csrf_field() }}
                 <input type="submit" class="btn btn-primary" value="更新">

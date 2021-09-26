@@ -6,16 +6,24 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Article; //Model
 use App\User;
+use App\Comment;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
     //
     public function home(Request $request)
     {
-        $cond_name = $request->cond_name;
+        $a_name = $request->title;
+        $a_time = $request->time;
+        $a_number = $request->number;
+        $a_place = $request->place;
+        $a_user = $request->user;
  
         return view('admin.article.home', 
-        ['cond_name' => $cond_name]);
+        ['a_name' => $a_name, 'a_time' => $a_time, 'a_number' => $a_number,
+    'a_place' => $a_place, 'a_user' => $a_user]);
+    
     }
 
     
@@ -30,8 +38,6 @@ class ArticleController extends Controller
     {
         //validationを行う
         $this->validate($request, Article::$rules);
-        
-        $user = User::find($request->id);
         
         $article = new Article;
         $form = $request->all();
@@ -50,38 +56,69 @@ class ArticleController extends Controller
         unset($form['image']);
         
         //データベースに保存する
-        $article->user_id = $user->id;
-        $article->fill($form); 
+        $article->user_id = Auth::id();
+        $article->fill($form);
         $article->save();
                 
         return view('admin.article.detail', 
-        ['article_detail' => $article, 'user' => $user]);  //作成ボタン押したら記事詳細にアクセスする
+        ['article_detail' => $article]);  //作成ボタン押したら記事詳細にアクセスする
     }
 
 
     public function index(Request $request)
     {
-        $cond_name = $request->cond_name;
-        if ($cond_name != '') {
-          // 検索されたら検索結果を取得する
-          $posts = Article::where('name', $cond_name)->get();
-      } else {
-          // それ以外はすべてのデータを取得する
-          $posts = Article::all();
-      }      
+        $query = Article::query(); //??
+        
+        $a_name = $request->input('name');
+        $a_time = $request->input('time');
+        $a_number = $request->input('number');
+        $a_place = $request->input('place');
+        $a_user = $request->input('user');
+        $contents = $request->contents;
+        
+        if(!empty($a_name)){
+            $query->where('name', 'like', '%'.$a_name.'%');
+        }
+        if(!empty($a_time)){
+            $query->where('time', 'like', '%'.$a_time.'%');
+        }
+        
+        $articles = $query->get();
+
         return view('admin.article.index', 
-        ['posts' => $posts, 'cond_name' => $cond_name]);
+        ['articles' => $articles, 'a_name' => $a_name, 'a_time' => $a_time,
+'a_number' => $a_number, 'a_place' => $a_place, 'a_user' => $a_user]);
     }
+    
+    
+    //     public function index(Request $request)
+    // {
+    //     $cond_name = $request->cond_name;
+    //     if ($cond_name != '') {
+    //       // 検索されたら検索結果を取得する
+    //       $articles = Article::where('name', $cond_name)->get();
+    //   } else {
+    //       // それ以外はすべてのデータを取得する
+    //       $articles = Article::all();
+    //   }      
+    //     return view('admin.article.index', 
+    //     ['articles' => $articles, 'cond_name' => $cond_name]);
+    // }
+
 
 
     public function detail(Request $request)  //一覧の詳細リンクから詳細画面へ飛ぶときにいる　create actionでは最後詳細画面に飛ぶから。
     {
         $article = Article::find($request->id);
+
+        $comments = Comment::where('article_id', $article->id)->get();
+
         if(empty($article)){
             abort(404);
         }
         return view('admin.article.detail', 
-        ['article_detail' => $article]);
+        ['article_detail' => $article, 'comments' => $comments]);
+        
     }
  
     

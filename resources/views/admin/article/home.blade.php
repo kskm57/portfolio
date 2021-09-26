@@ -17,7 +17,23 @@
                     <div class="form-group row">
                         <label class="col-md-2">ゲーム名</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" name="cond_name" value="{{ $cond_name}}">
+                            <input type="text" class="form-control" name="name" value="{{ $a_name }}">
+                        </div>
+                        <label class="col-md-2">所要時間</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="time" value="{{ $a_time }}">
+                        </div>
+                        <label class="col-md-2">プレイ人数</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="number" value="{{ $a_number }}">
+                        </div>
+                        <label class="col-md-2">場所</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="place" value="{{ $a_place }}">
+                        </div>
+                        <label class="col-md-2">投稿者</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="user" value="{{ $a_user }}">
                         </div>
                         <div class="col-md-2">
                             {{ csrf_field() }}

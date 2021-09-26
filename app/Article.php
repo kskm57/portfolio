@@ -9,7 +9,7 @@ class Article extends Model
     protected $guarded = array('id');
     
     public static $rules = array(
-        'user_id' => 'required',
+
         'name' => 'required',
         'time' => 'required',
         'number' => 'required',
@@ -17,8 +17,15 @@ class Article extends Model
         'contents' => 'required'
         );
         
-        public function user()
+    public function user()
     {
         return $this->belongsTo('App\User');
+    }
+    
+    
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+
     }
 }

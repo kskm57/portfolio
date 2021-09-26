@@ -1,10 +1,10 @@
 ・記事article
 
-Model　作成中
+Model　作成済
 
-View　作成中(admin)  作成中(閲覧者・非ログインユーザー) 
+View　作成済(admin)  作成中(閲覧者・非ログインユーザー) 
 
-Controller　作成中(admin)  作成中(閲覧者・非ログインユーザー) 
+Controller　作成済(admin)  作成中(閲覧者・非ログインユーザー) 
 
 
 ・掲示板 post
@@ -18,11 +18,11 @@ Controller
 
 ・記事コメント article comment
 
-Model
+Model　作成済(admin)
 
-View
+View　作成済(admin)
 
-Controller
+Controller　作成済(admin)
 
 
 ・掲示板コメント post comment
