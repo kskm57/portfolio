@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function create(Request $request)
+    public function create(Request $request)//投稿記事に対するコメントを作成
     {
         //validationを行う
         $this->validate($request, Comment::$rules);
@@ -23,8 +23,8 @@ class CommentController extends Controller
         unset($form['_token']);
         
         //データベースに保存する
-        $comment->user_id = Auth::id();
-        $comment->article_id = $request->id;
+        $comment->user_id = Auth::id();//user_idカラムにはアクセス者のidを代入
+        $comment->article_id = $request->id;//article_idカラムにはリクエストのidを代入
         $comment->fill($form);
         $comment->save();
                 
@@ -33,16 +33,16 @@ class CommentController extends Controller
     }
     
     
-    public function index(Request $request)
-    {
-        $articles = Article::all();
+    // public function index(Request $request)//いらいない
+    // {
+    //     $articles = Article::all();
           
-        return view('admin.article.detail', 
-        ['articles' => $articles, 'cond_name' => $cond_name]);
-    }
+    //     return view('admin.article.detail', 
+    //     ['articles' => $articles, 'cond_name' => $cond_name]);
+    // }
     
     
-    public function delete(Request $request)
+    public function delete(Request $request)//投稿記事に対するコメントを削除
     {
         $comment = Comment::find($request->id);
         

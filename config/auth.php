@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'user',          // マルチログイン導入時webからuserに変更
         'passwords' => 'users',
     ],
 
@@ -46,6 +46,16 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        
+        'user' => [//必要？
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        
+        'admin' => [//追加
+            'driver' => 'session', //追加
+            'provider' => 'admins', //追加(マルチログイン)
+        ],
     ],
 
     /*
@@ -70,7 +80,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-
+        
+        'admins' => [ //追加(マルチログイン)
+            'driver' => 'eloquent', //追加
+            'model' => App\Admin::class, //追加
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -98,6 +112,11 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+        
+        'admins' => [//追加(マルチログイン)
+            'provider' => 'admins', //追加
+            'table' => 'password_resets', //追加
+            'expire' => 60, //追加
+        ],
     ],
-
 ];

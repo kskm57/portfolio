@@ -4,19 +4,35 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use App\User; //Model
-use App\Article;
-use App\Comment;
 
 class UserController extends Controller
 {
-    public function add(Request $request)
+    public function index(Request $request)
     {
-        $user = User::find($request->id); //アクセス者のidを取得
-        // $posts = Article::where('user_id', $user)->get();アクセス者の記事を取得
-        $articles = $user->articles;
-        return view('admin.user.index',
-            ['articles' => $articles]);
+        $all_users = User::all();
+        $deleted_users = User::onlyTrashed()->get();
+        $id = $request->id;
+        
+        return view('admin.user.index',['all_users'=>$all_users, 'id'=>$id, 
+        'deleted_users'=>$deleted_users]);
+    }
+    
+    
+    public function delete(Request $request)
+    {
+        $user = User::find($request->id);
+        
+        $user->delete();
+        
+        return redirect('admin/user/index');
+    }
+    
+    
+    public function restore(Request $request)
+    {
+        $user = User::onlyTrashed()->where('id', $request->id)->restore();//削除済みの要素を復元
+        // dd($id);
+        return redirect('admin/user/index');
     }
 }

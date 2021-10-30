@@ -12,8 +12,8 @@
         
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>ニュース編集</h2>
-                <form action="{{ action('Admin\ArticleController@update') }}" method="post" enctype="multipart/form-data">
+                <h2>ゲーム編集</h2>
+                <form action="{{ action('User\ArticleController@update') }}" method="post" enctype="multipart/form-data">
                     @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
