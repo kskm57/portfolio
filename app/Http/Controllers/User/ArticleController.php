@@ -10,6 +10,7 @@ use App\Comment;
 use App\Reply;
 use App\Favorite;
 use Illuminate\Support\Facades\Auth;//Authクラスを読み込むために必要
+use Storage;//imageの保存をS3になるように
 
 class ArticleController extends Controller
 {
@@ -59,8 +60,9 @@ class ArticleController extends Controller
         
         //フォームから画像が送信されて来たら、保存して、$news->image_path に画像のパスを保存する
         if (isset($form['image'])) {
-            $path = $request->file('image')->store('public/image');
-            $article->image_path = basename($path);
+            $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+            $article->image_path = Storage::disk('s3')->url($path);
+            
         } else{
             $article->image_path = null;
         }

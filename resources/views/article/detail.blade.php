@@ -79,6 +79,11 @@
                         <div class="col-md-8 detail_content">{{ "削除されたユーザー" }}</div>
                     @endif
             </div>
+            <div class="image">
+                @if ($article_detail->image_path)
+                    <img src="{{ $article_detail->image_path }}">
+                @endif
+            </div>
                 {{--画像を表示させるdiv作る--}}
         </div>
         <div class="row">
