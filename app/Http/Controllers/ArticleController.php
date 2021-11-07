@@ -98,7 +98,8 @@ class ArticleController extends Controller
 
     public function detail(Request $request)  //検索結果詳細画面
     {
-        $article = Article::find($request->id);//リクエストの記事idを持つ記事を代入
+        //リクエストの記事idを持つ記事を代入
+        $article = Article::find($request->id);
 
         $comments = Comment::where('article_id', $article->id)->get();//記事のidと同じ値をarticle_idカラムに持つコメントを取得
 
