@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;//Trait 'App\SoftDeletes'
 
 class User extends Authenticatable
 {
+    protected $guarded = array('id');
+    
+    public static $rules = array(
+        'name' => 'required',
+        'email' => 'required',
+        'password' => 'required'
+        );
+    
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];//削除した日がわかるように$datesでdeleted_atカラムを作成
@@ -44,8 +52,7 @@ class User extends Authenticatable
     ];
     
     
-    
-    protected $guarded = array('id');
+
     
     
     public function articles()
@@ -116,4 +123,7 @@ class User extends Authenticatable
     {
         return (boolean) $this->follows()->where('following_id', $user_id)->first(['id']);
     }
+    
+    
+    
 }

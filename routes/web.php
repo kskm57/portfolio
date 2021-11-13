@@ -18,6 +18,8 @@
 //Adminログイン後
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function(){
     
+    Route::get('user/edit', 'Admin\UserController@edit');//ユーザーパスワード編集画面
+    Route::post('user/update', 'Admin\UserController@update');//ユーザーパスワード編集
     Route::get('user/index', 'Admin\UserController@index');//ユーザー一覧
     Route::get('user/delete', 'Admin\UserController@delete');//ユーザー削除
     Route::get('user/restore', 'Admin\UserController@restore');//ユーザー復元

@@ -23,7 +23,7 @@
                                 <th width="20%">パスワード</th>                                
                                 <th width="10%">作成日</th>
                                 <th width="30%">更新日</th>
-                                <th width="10%">削除日</th>
+                                <th width="10%">パスワード編集</th>
                                 <th width="10%">削除</th>
                             </tr>
                         </thead>
@@ -36,7 +36,7 @@
                                     <td>{{ \Str::limit($user->password, 100) }}</td>
                                     <td>{{ \Str::limit($user->created_at, 100) }}</td>
                                     <td>{{ \Str::limit($user->updated_at, 100) }}</td>  
-                                    <td>{{ \Str::limit($user->deleted_at, 100) }}</td>
+                                    <td><a href="{{ action('Admin\UserController@edit', ['id' => $user->id]) }}">編集</a></td>
                                     <td><a href="{{ action('Admin\UserController@delete', ['id' => $user->id]) }}">削除</a></td>
                                 </tr>
                             @endforeach

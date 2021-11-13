@@ -77,7 +77,7 @@ method="POST" style="display: none;">
                                     </form>
                                 </div>
                             </li>
-                            @endguest
+                        @endguest
                         </ul>
                     </div>
                 </div>
